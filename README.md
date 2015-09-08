@@ -2,13 +2,13 @@
 
 Example showing AWS S3 pre-signed POST.
 
-## Run locally
+### Run locally
 
-### 1. You'll need to have the Go App Engine SDK installed and working.
+#### 1. You'll need to have the Go App Engine SDK installed and working.
 
-### 2. Clone this repo.
+#### 2. Clone this repo.
 
-### 3. Create an AWS S3 test bucket with public-read
+#### 3. Create an AWS S3 test bucket with public-read
 
 Bucket Policy:
 
@@ -26,7 +26,7 @@ Bucket Policy:
       }]
     }
 
-### 4. Configure the AWS credentials in `s3.go`
+#### 4. Configure the AWS credentials in `s3.go`
 
 S3 credentials:
 
@@ -35,11 +35,11 @@ S3 credentials:
     const accessKeyID = "TODO"
     const secretAccessKey = "TODO"
 
-### 5. run the app locally
+#### 5. run the app locally
 
     $ goapp serve
 
-### 6. Open `localhost:8080` with your browser.
+#### 6. Open `localhost:8080` with your browser.
 
 You should now see the HTML form so you can select a file to upload. Assuming
 all setup is correct, the file will be uploaded to the S3 bucket.
