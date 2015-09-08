@@ -7,6 +7,14 @@ import (
 	"appengine"
 
 	"github.com/twinj/uuid"
+	"github.com/murrekatt/go-s3presigned-post"
+)
+
+const (
+	regionName = "FILL-ME-IN"
+	bucketName = "FILL-ME-IN"
+	accessKeyID = "FILL-ME-IN"
+	secretAccessKey = "FILL-ME-IN"
 )
 
 // HTML form for pre-signed POST
@@ -49,9 +57,18 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 	// a unique key to upload
 	id := uuid.NewV4().String()
+
+	// AWS S3 credentials
+	creds := &s3.Credentials{
+		Region: regionName,
+		Bucket: bucketName,
+		AccessKeyID: accessKeyID,
+		SecretAccessKey: secretAccessKey,
+	}
+
 	// create pre-signed POST details
-	policy := NewPolicy(id, regionName)
-	post, err := NewPresignedPOST(policy)
+	policy := s3.NewPolicy(id, creds)
+	post, err := s3.NewPresignedPOST(policy)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
