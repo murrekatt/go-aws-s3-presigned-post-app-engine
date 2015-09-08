@@ -30,16 +30,18 @@ Bucket Policy:
 
 S3 credentials:
 
-    const regionName = "TODO"
-    const bucketName = "TODO"
-    const accessKeyID = "TODO"
-    const secretAccessKey = "TODO"
+    const (
+       	regionName = "FILL-ME-IN"
+        bucketName = "FILL-ME-IN"
+        accessKeyID = "FILL-ME-IN"
+        secretAccessKey = "FILL-ME-IN"
+    )
 
 #### 5. run the app locally
 
     $ goapp serve
 
-#### 6. Open `localhost:8080` with your browser.
+#### 6. Open `localhost:8080/upload` with your browser.
 
 You should now see the HTML form so you can select a file to upload. Assuming
 all setup is correct, the file will be uploaded to the S3 bucket.
