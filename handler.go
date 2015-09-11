@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 
@@ -15,6 +16,7 @@ const (
 	bucketName = "FILL-ME-IN"
 	accessKeyID = "FILL-ME-IN"
 	secretAccessKey = "FILL-ME-IN"
+	redirectURL = "FILL-ME-IN/success"
 )
 
 // HTML form for pre-signed POST
@@ -28,6 +30,7 @@ const htmlDocument = `
   <form action="{{.Action}}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="key" value="{{.Key}}" />
     <input type="hidden" name="acl" value="public-read" />
+    <input type="hidden" name="success_action_redirect" value="{{.RedirectURL}}" />
     <input type="hidden" name="X-Amz-Credential" value="{{.Credential}}" />
     <input type="hidden" name="X-Amz-Algorithm" value="AWS4-HMAC-SHA256" />
     <input type="hidden" name="X-Amz-Date" value="{{.Date}}" />
@@ -64,6 +67,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		Bucket: bucketName,
 		AccessKeyID: accessKeyID,
 		SecretAccessKey: secretAccessKey,
+		RedirectURL: redirectURL,
 	}
 
 	// create pre-signed POST details
@@ -74,4 +78,9 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 	// render HTML form
 	t.Execute(w, post)
+}
+
+// Handles the redirect from S3 after a successful upload.
+func handleSuccess(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "success")
 }
