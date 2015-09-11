@@ -32,7 +32,6 @@ const htmlDocument = `
     <input type="hidden" name="X-Amz-Algorithm" value="AWS4-HMAC-SHA256" />
     <input type="hidden" name="X-Amz-Date" value="{{.Date}}" />
     <h3>Tags</h3>
-    <input type="input"  name="x-amz-meta-tag" value="" size="50" /><br />
     <input type="hidden" name="Policy" value="{{.Policy}}" />
     <input type="hidden" name="X-Amz-Signature" value="{{.Signature}}" />
     <h3>File</h3>
