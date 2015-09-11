@@ -67,8 +67,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// create pre-signed POST details
-	policy := s3.NewPolicy(id, creds)
-	post, err := s3.NewPresignedPOST(policy)
+	post, err := s3.NewPresignedPOST(id, creds)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
