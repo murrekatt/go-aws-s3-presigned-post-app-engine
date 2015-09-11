@@ -7,3 +7,7 @@ handlers:
 - url: /upload
   script: _go_app
   secure: always
+
+- url: /success.*
+  script: _go_app
+  secure: always
