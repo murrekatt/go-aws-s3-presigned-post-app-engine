@@ -31,7 +31,6 @@ const htmlDocument = `
     <input type="hidden" name="X-Amz-Credential" value="{{.Credential}}" />
     <input type="hidden" name="X-Amz-Algorithm" value="AWS4-HMAC-SHA256" />
     <input type="hidden" name="X-Amz-Date" value="{{.Date}}" />
-    <h3>Tags</h3>
     <input type="hidden" name="Policy" value="{{.Policy}}" />
     <input type="hidden" name="X-Amz-Signature" value="{{.Signature}}" />
     <h3>File</h3>
@@ -66,7 +65,8 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// create pre-signed POST details
-	post, err := s3.NewPresignedPOST(id, creds)
+	opts := &s3.PolicyOptions{ 5, 1024000 }
+	post, err := s3.NewPresignedPOST(id, creds, opts)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
